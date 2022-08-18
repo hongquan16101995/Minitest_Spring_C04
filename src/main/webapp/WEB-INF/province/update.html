@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 400px;
+            border: 1px solid;
+        }
+
+        tr, th, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<h1>Update form</h1>
+<form method="post" th:object="${province}">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td><label><input type="text" th:field="*{name_province}"></label></td>
+        </tr>
+        <tr>
+            <th>Popular</th>
+            <td><label><input type="text" th:field="*{popular}"></label></td>
+        </tr>
+        <tr>
+            <th>Area</th>
+            <td><label><input type="text" th:field="*{area}"></label></td>
+        </tr>
+        <tr>
+            <th>GDP</th>
+            <td><label><input type="text" th:field="*{gdp}"></label></td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td><label><input type="text"></label></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td><label>
+                <select th:field="*{country}">
+                    <option th:each="c : ${countries}"
+                            th:value="${c.getId()}" th:text="${c.getName_country()}"></option>
+                </select>
+            </label></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Update</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<button><a th:href="@{/province}">Back to home</a></button>
+</body>
+</html>

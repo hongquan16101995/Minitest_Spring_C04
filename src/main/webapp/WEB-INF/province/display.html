@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 800px;
+            border: 1px solid;
+        }
+
+        tr, th, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<h1><a style="text-decoration: none" th:href="@{/province}">List province</a></h1>
+<h2 th:text="${mess}"></h2>
+<button><a th:href="@{/province/create}">Creat province</a></button>
+<button><a th:href="@{/province/popular}">Top3 Popular</a></button>
+<button><a th:href="@{/province/area}">Top3 Area</a></button>
+<br>
+<form th:action="@{/province}" method="get">
+    <label><input type="text" name="search" th:value="${search}"></label>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Popular</th>
+        <th>Area</th>
+        <th>GDP</th>
+        <th>Image</th>
+        <th>Country</th>
+        <th colspan="3">Action</th>
+    </tr>
+    <tr th:each="p,ps : ${provinces}">
+        <td th:text="${ps.count}"></td>
+        <td th:text="${p.getName_province()}"></td>
+        <td th:text="${p.getPopular()}"></td>
+        <td th:text="${p.getArea()}"></td>
+        <td th:text="${p.getGdp()}"></td>
+        <td th:text="${p.getImage()}"></td>
+        <td><a th:href="@{/province(id=${p.getCountry().getId()})}" th:text="${p.getCountry().getName_country()}"></a></td>
+        <td>
+            <button><a th:href="@{/province/update/{id}(id=${p.getId()})}">Update</a></button>
+        </td>
+        <td>
+            <button><a th:href="@{/province/delete/{id}(id=${p.getId()})}">Delete</a></button>
+        </td>
+        <td>
+            <button><a th:href="@{/province/detail/{id}(id=${p.getId()})}">Detail</a></button>
+        </td>
+    </tr>
+</table>
+<div>
+    <button th:if="${provinces.hasPrevious()}">
+        <a th:href="@{/province(page=${provinces.number - 1},id=${id})}">Previous</a>
+    </button>
+    <span th:text="${provinces.number + 1}"></span>/
+    <span th:text="${provinces.totalPages}"></span>
+    <button th:if="${provinces.hasNext()}">
+        <a th:href="@{/province(page=${provinces.number + 1},id=${id})}">Next</a>
+    </button>
+</div>
+</body>
+</html>

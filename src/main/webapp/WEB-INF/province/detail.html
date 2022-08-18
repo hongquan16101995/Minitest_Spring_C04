@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 800px;
+            border: 1px solid;
+        }
+
+        tr, th, td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+<h1>Detail province</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Popular</th>
+        <th>Area</th>
+        <th>GDP</th>
+        <th>Image</th>
+        <th>Country</th>
+    </tr>
+    <tr th:each="p : ${province}">
+        <td th:text="${p.getName_province()}"></td>
+        <td th:text="${p.getPopular()}"></td>
+        <td th:text="${p.getArea()}"></td>
+        <td th:text="${p.getGdp()}"></td>
+        <td th:text="${p.getImage()}"></td>
+        <td th:text="${p.getCountry().getName_country()}"></td>
+    </tr>
+</table>
+<button><a th:href="@{/province}">Back to home</a></button>
+</body>
+</html>
